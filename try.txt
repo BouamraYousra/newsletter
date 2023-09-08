@@ -1,0 +1,31 @@
+
+        mailchimp.setConfig({
+          apiKey: "e94e45790148fbe6e72fe01e9e673f92",
+          server: "us21"
+        });
+
+        const subscribingUser = {
+            firstName:first,
+            lastName: last,
+            email: email
+          };
+        async function run() {
+          const response = await mailchimp.lists.addListMember(listId,{
+            email_address: subscribingUser.email,
+            status: "subscribed",
+            merge_fields: {
+              FNAME: subscribingUser.firstName,
+              LNAME: subscribingUser.lastName,
+              PHONE: '998866554433',
+            }
+
+          });
+
+        console.log(
+            `Successfully created an audience. The audience id is
+          ${response.id}.`
+          );
+          console.log(response);
+        }
+
+        run();
